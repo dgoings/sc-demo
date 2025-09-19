@@ -1,0 +1,16 @@
+// calculator/world.wit
+  package math:calculator@0.1.0;
+
+  interface calculate {
+      enum op {
+          add,
+          multiply,
+      }
+      eval-expression: func(op: op, x: u32, y: u32) -> u32;
+  } 
+
+  world calculator {
+      export calculate;
+      import ops:adder/add@0.1.0;
+      import ops:multiplier/multiply@0.1.0;
+  }

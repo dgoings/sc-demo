@@ -1,0 +1,18 @@
+[package]
+name = "command"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+wit-bindgen-rt = { version = "0.24.0", features = ["bitflags"] }
+clap = { version = "4.3.19", features = ["derive"] }
+
+[package.metadata.component.target]
+path = "wit"
+world = "app"
+
+[package.metadata.component.target.dependencies]
+"math:calculator" = { path = "../calculator/wit" }
+"ops:adder" = { path = "../adder/wit" }
+"ops:multiplier" = { path = "../multiplier/wit" }

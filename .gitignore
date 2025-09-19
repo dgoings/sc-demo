@@ -1,0 +1,14 @@
+# adder/ ignore
+node_modules
+dist
+*.wasm
+
+# multiplier/ ignore
+__pycache__
+.venv
+wit_world
+*.wasm
+
+# calculator/ + command/ ignore
+target
+*.wasm

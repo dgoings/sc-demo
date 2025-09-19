@@ -1,0 +1,20 @@
+{
+  "name": "calculator-cli",
+  "description": "Simple codebase for building up a calculator cli app via WASI-0.2 WebAssembly Components",
+  "type": "module",
+  "scripts": {
+    "adder:build": "cd adder && npm run build && cp adder.wasm ../adder.wasm",
+    "multiplier:build": "cd multiplier && source .venv/bin/activate &&componentize-py --wit-path wit/world.wit --world multiplier componentize app -o multiplier.wasm && cp multiplier.wasm ../multiplier.wasm",
+    "calculator:build": "cd calculator && cargo component build --release && cp target/wasm32-wasip1/release/calculator.wasm ../calculator.wasm",
+    "command:build": "cd command && cargo component build --release && cp target/wasm32-wasip1/release/command.wasm ../command.wasm",
+    "compose:calculator": "wac plug calculator.wasm --plug adder.wasm --plug multiplier.wasm -o calculator-composed.wasm",
+    "compose:command": "wac plug command.wasm --plug calculator-composed.wasm -o app.wasm",
+    "build": "npm run adder:build && npm run multiplier:build && npm run calculator:build && npm run command:build && npm run compose:calculator && npm run compose:command",
+    "transpile:calculator": "jco transpile calculator-composed.wasm -o dist/transpiled",
+    "calculate": "node calculator.js"
+  },
+  "dependencies": {
+    "@bytecodealliance/jco": "^1.12.0",
+    "@bytecodealliance/componentize-js": "^0.18.4"
+  }
+}

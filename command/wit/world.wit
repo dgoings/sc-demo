@@ -1,0 +1,6 @@
+// command/world.wit
+package cli:app;
+
+world app {
+    import math:calculator/calculate@0.1.0;
+}
